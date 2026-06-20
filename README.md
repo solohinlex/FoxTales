@@ -35,50 +35,58 @@
 
 - WSL2 / Linux
 - Python 3.12+
-- [Ollama](https://ollama.com/) — установлен и запущен локально? либо доступен OpenAI api
+- [Ollama](https://ollama.com/) — установлен и запущен локально, либо доступен OpenAI API
+- `make` — для удобного управления проектом
 
 ---
 
-### 1. Подготовка окружения
+### 1. Подготовка системы
 
 ```bash
-# Необходимые пакеты для Python
+# Необходимые пакеты
 sudo apt-get update
-sudo apt install python3-pip python3.12-venv -y
+sudo apt install python3-pip python3.12-venv make -y
 
 # Клонируем репозиторий
 git clone https://github.com/solohinlex/FoxTales.git
 cd FoxTales
-
-# Создаём окружение и устанавливаем зависимости
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
 ```
 
-### 2. Настройка
+### 2. Установка и настройка
 
 ```bash
-cp .env.example .env
+make setup
+```
+
+Команда создаст виртуальное окружение, установит зависимости и сформирует `.env` из шаблона.
+
+Затем отредактируй `.env`:
+
+```bash
 nano .env
 ```
 
 > Для работы через Ollama укажи локальный адрес в `API_BASE`,
-> например `http://localhost:11434`
+> например `http://localhost:11434/v1`
 
-### 3. Первый запуск
+### 3. Запуск
 
 ```bash
-source .venv/bin/activate
-python src/main.py
+make run
 ```
 
-### 4. Повторный запуск
+---
+
+## 🛠️ Команды
 
 ```bash
-cd FoxTales
-source .venv/bin/activate
-python src/main.py
+make              # показать все доступные команды
+make setup        # первичная настройка: venv + зависимости + .env
+make run          # запустить бота
+make install      # переустановить зависимости
+make freeze       # сохранить текущие зависимости в requirements.txt
+make push M="..."  # закоммитить и запушить изменения
+make clean        # удалить виртуальное окружение и кэш
 ```
 
 ---
