@@ -7,10 +7,17 @@ import os
 load_dotenv()
 
 # ─── Модель ────────────────────────────────────────────────
+_model_name = os.getenv("MODEL_NAME", "gpt-4o")
+_api_base   = os.getenv("API_BASE") or None
+
+# Если задан локальный сервер — litellm требует префикс openai/
+if _api_base and not _model_name.startswith("openai/"):
+    _model_name = f"openai/{_model_name}"
+
 MODEL = {
-    "model": os.getenv("MODEL_NAME", "gpt-4o"),
-    "api_key": os.getenv("API_KEY"),
-    "api_base": os.getenv("API_BASE") or None,
+    "model":    _model_name,
+    "api_key":  os.getenv("API_KEY"),
+    "api_base": _api_base,
 }
 
 # ─── Пути ──────────────────────────────────────────────────

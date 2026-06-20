@@ -2,19 +2,22 @@
 
 from config import MODEL
 from litellm import completion
+from prompts import SYSTEM_PROMPT
 
 
 def chat(message: str, history: list) -> str:
     history.append({"role": "user", "content": message})
     
+    messages = [{"role": "system", "content": SYSTEM_PROMPT}] + history
+    
     response = completion(
         model=MODEL["model"],
         api_key=MODEL["api_key"],
         api_base=MODEL["api_base"],
-        messages=history
+        messages=messages
     )
-    
-    answer = response.choices[0].message.content
+
+    answer = response.choices[0].message.content.strip()
     history.append({"role": "assistant", "content": answer})
     
     return answer

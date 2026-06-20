@@ -1,0 +1,35 @@
+id: fox_tales
+title: Лисьи сказки
+status: in_progress
+created_at: 2021-03-10
+updated_at: 2025-06-28
+description: "Эти истории о волшебстве. И о том, как волшебство приходит в обыденный мир и меняет его. И о лисах конечно."
+tags:
+  - сказки
+  - фэнтези
+  - волшебство
+  - лисы
+
+characters:
+  - andrey
+  - alisa
+  - kimiko
+  - hanako
+
+chapters:
+  - id: chapter_01
+    file: chapters/chapter_01.md
+    title: Глава 1. Встреча
+    description: "Андрей встречает Алису в лесу и узнает о её волшебных способностях."
+  - id: chapter_02
+    file: chapters/chapter_02.md
+    title: Глава 2. Тайна лис
+    description: "Алиса рассказывает Андрею о лисах и их магических силах."
+  - id: chapter_03
+    file: chapters/chapter_03.md
+    title: Глава 3. Испытание
+    description: "Андрей проходит испытание, чтобы доказать свою преданность Алисе и её миру."
+  - id: chapter_04
+    file: chapters/chapter_04.md
+    title: Глава 4. Союз
+    description: "Андрей и Алиса объединяются, чтобы защитить лес от угрозы."
