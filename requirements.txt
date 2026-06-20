@@ -1,0 +1,6 @@
+litellm
+python-dotenv
+chromadb
+ollama
+python-docx
+pathlib
