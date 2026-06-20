@@ -29,7 +29,8 @@ chapters:
   - id: chapter_01
     file: chapters/chapter_01.md
     title: История о совершенном воине
-    description: ""
+    description: |
+      Алиса и её отец Андрей. Сказка о воине Тетсуо, прошедшем духовные испытания и ставшем живым мечом Кусанаги.
     characters:
       - andrey
       - alisa
@@ -37,7 +38,8 @@ chapters:
   - id: chapter_02
     file: chapters/chapter_02.md
     title: История о лисе, которая хотела поиграть
-    description: ""
+    description: |
+      Андрей случайно попадает в волшебный мир через московский парк и встречает молодую двухвостую лису Кимико.
     characters:
       - kimiko
       - hanako
@@ -45,7 +47,8 @@ chapters:
   - id: chapter_03
     file: chapters/chapter_03.md
     title: История о девочке, которая шла из школы домой
-    description: ""
+    description: |
+      Алиса в человеческой школе. Спасает одноклассников Карину и Сашу от древнего лесного духа-дерева.
     characters:
       - alisa
       - karina
@@ -53,14 +56,16 @@ chapters:
   - id: chapter_04
     file: chapters/chapter_04.md
     title: История о лисьих игрушках
-    description: ""
+    description: |
+      Раскрывается проклятие рода Ханако — её возлюбленные погибают. История Криса и сестёр-лис Кимико и Ханако.
     characters:
       - hanako
       - kimiko
   - id: chapter_05
     file: chapters/chapter_05.md
     title: История о званом обеде
-    description: ""
+    description: |
+      Андрей знакомится с семьёй Кимико. Обед с Тамамо-но-Маэ и Томоэ. Гадание определяет подвиг Андрея — достать меч из лошадиного черепа.
     characters:
       - andrey
       - kimiko
@@ -71,14 +76,16 @@ chapters:
   - id: chapter_06
     file: chapters/chapter_06.md
     title: Легенда о Белой Лошади и мудрой кицунэ
-    description: ""
+    description: |
+      Происхождение проклятия лисьего рода. Тамамо создала Кусанаги для победы над демоницей Белой Лошадью.
     characters:
       - tamamo
       - baima
   - id: chapter_07
     file: chapters/chapter_07.md
     title: История о мече в черепе
-    description: ""
+    description: |
+      Андрей в заброшенной деревне встречает Тетсуо. Столкновение с Белой Лошадью и освобождение меча Кусанаги.
     characters:
       - andrey
       - tetsuo
@@ -87,7 +94,8 @@ chapters:
   - id: chapter_08
     file: chapters/chapter_08.md
     title: История про духа сна
-    description: ""
+    description: |
+      Карина ищет пропавшего племянника Васю. Ритуал с Ханной Томоевной. Спасение от злого духа сна.
     characters:
       - alisa
       - hanako
@@ -96,13 +104,15 @@ chapters:
   - id: chapter_09
     file: chapters/chapter_09.md
     title: История о женщине в белом
-    description: ""
+    description: |
+      Белая Лошадь возвращается. Антон встречает её в кафе и становится её жертвой.
     characters:
       - baima
   - id: chapter_10
     file: chapters/chapter_10.md
     title: История о даосе и Северном Лисе
-    description: ""
+    description: |
+      Даосы бросают вызов Лисьей деревне. Томоэ демонстрирует силу без боя. Андрей начинает обучение у даосов.
     characters:
       - tomoe
       - andrey
@@ -110,13 +120,15 @@ chapters:
   - id: chapter_11
     file: chapters/chapter_11.md
     title: История о сливе и персике
-    description: ""
+    description: |
+      Флэшбек о Хуа Бейху (Таомэй). Даос Вэй жертвует её матерью ради победы над демоном. Начало пути Таомэй как даоса.
     characters:
       - hua_beihu
   - id: chapter_12
     file: chapters/chapter_12.md
     title: История о Громовой Стреле
-    description: ""
+    description: |
+      Флешбек о нападении генералов Демонического Пути на Лисью деревню. Хао Сюнь защищает Кимико и получает смертельную рану от Железного Рыцаря.
     characters:
       - baima
       - hanako
