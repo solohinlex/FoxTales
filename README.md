@@ -29,6 +29,60 @@
 
 ---
 
+## 🚀 Быстрый старт
+
+### Требования
+
+- WSL2 / Linux
+- Python 3.12+
+- [Ollama](https://ollama.com/) — установлен и запущен локально? либо доступен OpenAI api
+
+---
+
+### 1. Подготовка окружения
+
+```bash
+# Необходимые пакеты для Python
+sudo apt-get update
+sudo apt install python3-pip python3.12-venv -y
+
+# Клонируем репозиторий
+git clone https://github.com/solohinlex/FoxTales.git
+cd FoxTales
+
+# Создаём окружение и устанавливаем зависимости
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+### 2. Настройка
+
+```bash
+cp .env.example .env
+nano .env
+```
+
+> Для работы через Ollama укажи локальный адрес в `API_BASE`,
+> например `http://localhost:11434`
+
+### 3. Первый запуск
+
+```bash
+source .venv/bin/activate
+python src/main.py
+```
+
+### 4. Повторный запуск
+
+```bash
+cd FoxTales
+source .venv/bin/activate
+python src/main.py
+```
+
+---
+
 ## Контакты
 
 По вопросам коммерческого использования текстов или сотрудничества:
