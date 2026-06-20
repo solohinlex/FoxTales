@@ -1,0 +1,205 @@
+id: witch_hounting
+title: Охота на ведьму
+status: in_progress
+created_at: 2025-01-01
+updated_at: 2026-01-24
+description: "Ева обнаруживате, что её преследует таинственный монстр. Но на самом ли деле это монстр? Или это всего лишь её воображение?"
+tags:
+  - фэнтези
+  - триллер
+  - лисы
+
+characters:
+  - eva
+  - aleksandr
+  - elena
+  - hanako
+  - raiden
+  - sebastian
+  - professor
+  - black_man
+  - sasha
+  - andrey
+  - alisa
+  - prohor
+
+chapters:
+  - id: chapter_01
+    file: chapters/chapter_01.md
+    title: Глава 1
+    description: ""
+    characters:
+      - aleksandr
+      - sebastian
+  - id: chapter_02
+    file: chapters/chapter_02.md
+    title: Глава 2
+    description: ""
+    characters:
+      - eva
+      - elena
+  - id: chapter_03
+    file: chapters/chapter_03.md
+    title: Глава 3
+    description: ""
+    characters:
+      - aleksandr
+      - sasha
+  - id: chapter_04
+    file: chapters/chapter_04.md
+    title: Глава 4
+    description: ""
+    characters:
+      - eva
+      - aleksandr
+      - elena
+  - id: chapter_05
+    file: chapters/chapter_05.md
+    title: Глава 5
+    description: ""
+    characters:
+      - aleksandr
+      - sebastian
+      - andrey
+      - alisa
+      - prohor
+  - id: chapter_06
+    file: chapters/chapter_06.md
+    title: Глава 6
+    description: ""
+    characters:
+      - aleksandr
+      - sebastian
+      - andrey
+      - hanako
+  - id: chapter_07
+    file: chapters/chapter_07.md
+    title: Глава 7
+    description: ""
+    characters:
+      - eva
+      - aleksandr
+      - elena
+      - raiden
+  - id: chapter_08
+    file: chapters/chapter_08.md
+    title: Глава 8
+    description: ""
+    characters:
+      - eva
+      - aleksandr
+      - elena
+      - raiden
+ - id: chapter_09
+    file: chapters/chapter_09.md
+    title: Глава 9
+    description: ""
+    characters:
+      - eva
+      - aleksandr
+      - elena
+      - raiden
+  - id: chapter_10
+    file: chapters/chapter_10.md
+    title: Глава 10
+    description: ""
+    characters:
+      - eva
+      - aleksandr
+      - elena
+      - raiden
+      - black_man
+  - id: chapter_11
+    file: chapters/chapter_11.md
+    title: Глава 11
+    description: ""
+    characters:
+      - eva
+      - aleksandr
+      - sebastian
+  - id: chapter_12
+    file: chapters/chapter_12.md
+    title: Глава 12
+    description: ""
+    characters:
+      - eva
+      - sashа
+  - id: chapter_13
+    file: chapters/chapter_13.md
+    title: Глава 13
+    description: ""
+    characters:
+      - eva
+      - sashа
+      - raiden
+  - id: chapter_14
+    file: chapters/chapter_14.md
+    title: Глава 14
+    description: ""
+    characters:
+      - aleksandr
+      - sebastian
+  - id: chapter_15
+    file: chapters/chapter_15.md
+    title: Глава 15
+    description: ""
+    characters:
+      - eva
+      - raiden
+      - professor
+  - id: chapter_16
+    file: chapters/chapter_16.md
+    title: Глава 16
+    description: ""
+    characters:
+      - eva
+      - raiden
+      - professor
+  - id: chapter_17
+    file: chapters/chapter_17.md
+    title: Глава 17
+    description: ""
+    characters:
+      - eva
+      - professor
+  - id: chapter_18
+    file: chapters/chapter_18.md
+    title: Глава 18
+    description: ""
+    characters:
+      - eva
+      - professor
+      - raiden
+  - id: chapter_19
+    file: chapters/chapter_19.md
+    title: Глава 19
+    description: ""
+    characters:
+      - eva
+      - professor
+      - raiden
+  - id: chapter_20
+    file: chapters/chapter_20.md
+    title: Глава 20
+    description: ""
+    characters:
+      - eva
+      - raiden
+      - aleksandr
+      - sebastian
+  - id: chapter_21
+    file: chapters/chapter_21.md
+    title: Глава 21
+    description: ""
+    characters:
+      - eva
+      - raiden
+      - aleksandr
+      - sebastian
+  - id: chapter_22
+    file: chapters/chapter_22.md
+    title: Глава 22
+    description: ""
+    characters:
+      - eva
+      - aleksandr

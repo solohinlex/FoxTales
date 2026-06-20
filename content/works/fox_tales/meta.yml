@@ -15,21 +15,107 @@ characters:
   - alisa
   - kimiko
   - hanako
+  - tamamo
+  - tomoe
+  - raiden
+  - hua_beihu
+  - tetsuo
+  - karina
+  - prohor
+  - baima
 
 chapters:
   - id: chapter_01
     file: chapters/chapter_01.md
-    title: Глава 1. Встреча
-    description: "Андрей встречает Алису в лесу и узнает о её волшебных способностях."
+    title: История о совершенном воине
+    description: ""
+    characters:
+      - andrey
+      - alisa
+      - tetsuo
   - id: chapter_02
     file: chapters/chapter_02.md
-    title: Глава 2. Тайна лис
-    description: "Алиса рассказывает Андрею о лисах и их магических силах."
+    title: История о лисе, которая хотела поиграть
+    description: ""
+    characters:
+      - kimiko
+      - hanako
+      - andrey
   - id: chapter_03
     file: chapters/chapter_03.md
-    title: Глава 3. Испытание
-    description: "Андрей проходит испытание, чтобы доказать свою преданность Алисе и её миру."
+    title: История о девочке, которая шла из школы домой
+    description: ""
+    characters:
+      - alisa
+      - karina
+      - andrey
   - id: chapter_04
     file: chapters/chapter_04.md
-    title: Глава 4. Союз
-    description: "Андрей и Алиса объединяются, чтобы защитить лес от угрозы."
+    title: История о лисьих игрушках
+    description: ""
+    characters:
+      - hanako
+      - kimiko
+  - id: chapter_05
+    file: chapters/chapter_05.md
+    title: История о званом обеде
+    description: ""
+    characters:
+      - andrey
+      - kimiko
+      - hanako
+      - tamamo
+      - tomoe
+      - raiden
+  - id: chapter_06
+    file: chapters/chapter_06.md
+    title: Легенда о Белой Лошади и мудрой кицунэ
+    description: ""
+    characters:
+      - tamamo
+      - baima
+  - id: chapter_07
+    file: chapters/chapter_07.md
+    title: История о мече в черепе
+    description: ""
+    characters:
+      - andrey
+      - tetsuo
+      - baima
+      - alisa
+  - id: chapter_08
+    file: chapters/chapter_08.md
+    title: История про духа сна
+    description: ""
+    characters:
+      - alisa
+      - hanako
+      - karina
+      - prohor
+  - id: chapter_09
+    file: chapters/chapter_09.md
+    title: История о женщине в белом
+    description: ""
+    characters:
+      - baima
+  - id: chapter_10
+    file: chapters/chapter_10.md
+    title: История о даосе и Северном Лисе
+    description: ""
+    characters:
+      - tomoe
+      - andrey
+      - kimiko
+  - id: chapter_11
+    file: chapters/chapter_11.md
+    title: История о сливе и персике
+    description: ""
+    characters:
+      - hua_beihu
+  - id: chapter_12
+    file: chapters/chapter_12.md
+    title: История о Громовой Стреле
+    description: ""
+    characters:
+      - baima
+      - hanako
