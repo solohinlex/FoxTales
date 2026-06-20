@@ -1,0 +1,9 @@
+id: alisa
+name: Алиса
+aliases:
+  - Алиса
+story_role:
+  - fox_tales: protagonist
+  - witch_hounting: episode
+description: |
+  Девочка полулиса, дочь Андрея и Кимико
