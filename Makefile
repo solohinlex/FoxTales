@@ -6,6 +6,9 @@ PYTHON      ?= $(VENV)/bin/python
 PIP         ?= $(VENV)/bin/pip
 SRC         ?= src/main.py
 
+export PYTHONIOENCODING = utf-8
+export PYTHONUTF8       = 1
+
 # ─── Окружение ────────────────────────────────────────────
 .PHONY: venv
 venv: ## Создаёт виртуальное окружение
@@ -66,3 +69,9 @@ help: ## Показывает это сообщение
 	@echo "Доступные команды:"
 	@grep -E '^[a-zA-Z_-]+:.*?##' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
+
+.PHONY: run-debug
+run-debug: ## Отладка окружения
+	@echo "LANG=$$LANG"
+	@echo "LC_ALL=$$LC_ALL"
+	@echo "PYTHONIOENCODING=$$PYTHONIOENCODING"
