@@ -3,11 +3,36 @@ import json
 from litellm import completion
 from skills import ALL_SKILLS, SKILLS_MAP
 from config import MODEL
+from prompts import Presets, PromptBuilder
 
-def run_agent(user_message: str, history: list, system_prompt: str) -> str:
+def run_agent(
+    user_message: str,
+    history: list,
+    system_prompt: str | None = None,
+    task: str | None = None
+) -> str:
+    """Запуск агента с поддержкой выбора промпта
+    
+    Args:
+        user_message: Сообщение пользователя
+        history: История диалога
+        system_prompt: Системный промпт (для обратной совместимости)
+        task: Название задачи для выбора пресета (analysis, editing, etc.)
+    
+    Returns:
+        Ответ агента
+    """
+    # Определяем промпт: либо из task, либо из system_prompt
+    if task:
+        prompt = Presets.for_task(task)
+    elif system_prompt:
+        prompt = system_prompt
+    else:
+        prompt = Presets.for_task("search")  # промпт по умолчанию
+    
     history.append({"role": "user", "content": user_message})
     
-    messages = [{"role": "system", "content": system_prompt}] + history
+    messages = [{"role": "system", "content": prompt}] + history
     tools = [skill.to_tool_dict() for skill in ALL_SKILLS]
 
     # Цикл: модель может вызвать несколько скиллов подряд

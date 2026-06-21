@@ -2,7 +2,7 @@
 import sys
 from config import MODEL
 from agent import run_agent
-from prompts import SYSTEM_PROMPT
+from prompts import SYSTEM_PROMPT, Presets
 from vector_store import vector_store
 
 
@@ -16,9 +16,10 @@ def main():
     print_help()
 
     history = []
+    current_mode = "search"  # режим по умолчанию
 
     while True:
-        sys.stdout.write("Ты: ")
+        sys.stdout.write(f"[{current_mode}] Ты: ")
         sys.stdout.flush()
         raw = sys.stdin.buffer.readline()
         user_input = raw.decode('utf-8', errors='replace').strip()
@@ -46,9 +47,20 @@ def main():
             print_help()
             continue
 
+        # ── Режимы работы ──────────────────────────────────
+        if user_input.lower().startswith("mode "):
+            mode = user_input.split(" ", 1)[1].strip()
+            if mode in Presets.list_available():
+                current_mode = mode
+                print(f"✅ Режим установлен: {mode}")
+            else:
+                print(f"❌ Неизвестный режим. Доступные: {', '.join(Presets.list_available())}")
+            print()
+            continue
+
         # ── Основной диалог ────────────────────────────────
         print("Думаю...")
-        answer = run_agent(user_input, history, SYSTEM_PROMPT)
+        answer = run_agent(user_input, history, task=current_mode)
         print(f"\nИИ: {answer}\n")
 
 
@@ -57,8 +69,17 @@ def print_help():
 📖 Команды:
   reindex       — переиндексировать весь контент заново
   index status  — показать статистику индекса
+  mode <name>   — установить режим (search, analysis, editing, lore_check, character, planning)
   help          — эта справка
   выход / exit  — выйти
+
+🎯 Доступные режимы:
+  search       — поиск информации
+  analysis     — анализ текста
+  editing      — редактирование
+  lore_check   — проверка на соответствие лору
+  character    — работа с персонажами
+  planning     — планирование сюжета
     """)
 
 

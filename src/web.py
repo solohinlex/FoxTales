@@ -1,7 +1,7 @@
 # src/web.py
 import gradio as gr
 from agent import run_agent
-from prompts import SYSTEM_PROMPT
+from prompts import SYSTEM_PROMPT, Presets, PromptBuilder
 from vector_store import vector_store
 
 # Индексация при старте
@@ -74,6 +74,44 @@ with gr.Blocks(title="🦊 FoxTales AI") as demo:
             reindex_btn = gr.Button("🔄 Переиндексировать", variant="primary")
             reindex_output = gr.Textbox(label="Результат", interactive=False)
             reindex_btn.click(fn=reindex, outputs=reindex_output)
+        
+        # Вкладка режимов работы
+        with gr.TabItem("🎯 Режимы работы"):
+            gr.Markdown("### Выбор режима работы ИИ")
+            
+            mode_selector = gr.Dropdown(
+                label="Режим",
+                choices=[
+                    ("🔍 Поиск информации", "search"),
+                    ("📝 Анализ текста", "analysis"),
+                    ("✏️ Редактирование", "editing"),
+                    ("🌍 Проверка лора", "lore_check"),
+                    ("👤 Персонаж", "character"),
+                    ("📋 Планирование", "planning"),
+                ],
+                value="search"
+            )
+            
+            mode_input = gr.Textbox(
+                label="Запрос / Текст",
+                placeholder="Введите запрос или текст для анализа...",
+                lines=5
+            )
+            
+            mode_output = gr.Textbox(label="Результат", lines=10, interactive=False)
+            
+            mode_btn = gr.Button("Выполнить", variant="primary")
+            
+            def run_mode(mode: str, text: str):
+                """Запуск агента в выбранном режиме"""
+                answer = run_agent(text, [], task=mode)
+                return answer
+            
+            mode_btn.click(
+                fn=run_mode,
+                inputs=[mode_selector, mode_input],
+                outputs=mode_output
+            )
 
 if __name__ == "__main__":
     demo.launch(server_name="0.0.0.0", server_port=7860)
