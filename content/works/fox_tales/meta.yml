@@ -24,6 +24,7 @@ characters:
   - prohor
   - baima
   - writer
+  - vladimir_petrovich
 
 chapters:
   - id: chapter_01
@@ -101,6 +102,7 @@ chapters:
       - hanako
       - karina
       - prohor
+      - vladimir_petrovich
   - id: chapter_09
     file: chapters/chapter_09.md
     title: История о женщине в белом
