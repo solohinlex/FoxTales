@@ -3,7 +3,8 @@ title: Охота на ведьму
 status: in_progress
 created_at: 2025-01-01
 updated_at: 2026-01-24
-description: "Ева обнаруживате, что её преследует таинственный монстр. Но на самом ли деле это монстр? Или это всего лишь её воображение?"
+description: |
+  Ева обнаруживает, что её преследует таинственный монстр. Но на самом ли деле это монстр? Или это всего лишь её воображение?
 tags:
   - фэнтези
   - триллер
@@ -98,7 +99,7 @@ chapters:
       - aleksandr
       - elena
       - raiden
- - id: chapter_09
+  - id: chapter_09
     file: chapters/chapter_09.md
     title: Глава 9
     description: |
