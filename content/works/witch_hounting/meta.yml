@@ -27,28 +27,32 @@ chapters:
   - id: chapter_01
     file: chapters/chapter_01.md
     title: Глава 1
-    description: ""
+    description: |
+      Александр прибывает на место преступления в многоквартирном доме, где погибли его знакомая Настя и ещё один человек. В квартире он встречает монсеньора Себастиана — итальянского специалиста по «особым случаям». Они будут работать вместе над этим делом.
     characters:
       - aleksandr
       - sebastian
   - id: chapter_02
     file: chapters/chapter_02.md
     title: Глава 2
-    description: ""
+    description: |
+      Еве снится кошмар о гибели родителей в автокатастрофе и странном безликом существе. На лекции она замечает среди студентов парня с неестественно длинными руками, который оказывается Дэном. Подруга Лена приглашает Еву на вечеринку.
     characters:
       - eva
       - elena
   - id: chapter_03
     file: chapters/chapter_03.md
     title: Глава 3
-    description: ""
+    description: |
+      Александр разбирает документы погибшей Насти, пытаясь понять, что её погубило. В разговоре с коллегой Сашей он узнаёт, что в их работе опасны даже безобидные привычки, и решает проверить версию о мужчине в жизни Насти.
     characters:
       - aleksandr
       - sasha
   - id: chapter_04
     file: chapters/chapter_04.md
     title: Глава 4
-    description: ""
+    description: |
+      Ева работает официанткой и начинает видеть галлюцинации — столик за пальмой, которого нет. Она встречает Александра и Лену в ресторане. Александр замечает, что Ева пахнет страхом.
     characters:
       - eva
       - aleksandr
@@ -56,7 +60,8 @@ chapters:
   - id: chapter_05
     file: chapters/chapter_05.md
     title: Глава 5
-    description: ""
+    description: |
+      Александр и монсеньор Себастиан едут за город к Хранителю — отшельнику, живущему в лесу. Там они встречают его дочь Алису и через зеркало связываются с Ханако-сан, которая передаёт им перстень для заточения демона.
     characters:
       - aleksandr
       - sebastian
@@ -66,7 +71,8 @@ chapters:
   - id: chapter_06
     file: chapters/chapter_06.md
     title: Глава 6
-    description: ""
+    description: |
+      Александр и монсеньор присутствуют при ритуале общения через зеркало с Ханако-сан. Она передаёт им перстень для заточения демона, объясняя, что преступник объявлен демоном и лишён покровительства.
     characters:
       - aleksandr
       - sebastian
@@ -75,7 +81,8 @@ chapters:
   - id: chapter_07
     file: chapters/chapter_07.md
     title: Глава 7
-    description: ""
+    description: |
+      Компания едет на дачу к Лене. Ева рассказывает подруге о своих страхах и странных видениях. Лена предлагает познакомить Еву с Александром и Дэном поближе.
     characters:
       - eva
       - aleksandr
@@ -84,7 +91,8 @@ chapters:
   - id: chapter_08
     file: chapters/chapter_08.md
     title: Глава 8
-    description: ""
+    description: |
+      На даче все готовят шашлыки и обедают. Дэн рассказывает о Нефритовой Империи и её традициях. Ева чувствует себя неловко, но постепенно расслабляется.
     characters:
       - eva
       - aleksandr
@@ -93,7 +101,8 @@ chapters:
  - id: chapter_09
     file: chapters/chapter_09.md
     title: Глава 9
-    description: ""
+    description: |
+      За обедом Ева наконец рассказывает о своих кошмарах и преследующем её существе. Александр понимает, что это связано со временем гибели Насти. Дэн предлагает провести ритуал для выявления проблемы.
     characters:
       - eva
       - aleksandr
@@ -102,7 +111,8 @@ chapters:
   - id: chapter_10
     file: chapters/chapter_10.md
     title: Глава 10
-    description: ""
+    description: |
+      Дэн проводит ритуал с зеркалом. В отражении появляется чёрное безликое существо, нападающее на Лену. Дэн сражается с ним огненными хвостами, велит всем бежать.
     characters:
       - eva
       - aleksandr
@@ -112,7 +122,8 @@ chapters:
   - id: chapter_11
     file: chapters/chapter_11.md
     title: Глава 11
-    description: ""
+    description: |
+      Александр везёт Лену в больницу, Ева с ним. После звонка Дэна Александр связывается с монсеньором, который требует привезти Еву в безопасное место — она может быть в опасности.
     characters:
       - eva
       - aleksandr
@@ -120,14 +131,16 @@ chapters:
   - id: chapter_12
     file: chapters/chapter_12.md
     title: Глава 12
-    description: ""
+    description: |
+      Александр привозит Еву в институт, оставляет её с коллегой Сашей. Тот угощает её чаем и булочкой, расспрашивает о случившемся. Ева засыпает от успокоительного.
     characters:
       - eva
       - sashа
   - id: chapter_13
     file: chapters/chapter_13.md
     title: Глава 13
-    description: ""
+    description: |
+      Ева просыпается ночью и слышит разговор Саши по телефону. В её голове появляется голос Дэна, предупреждающий об опасности. Саша делает ей укол, и Ева теряет сознание.
     characters:
       - eva
       - sashа
@@ -135,14 +148,16 @@ chapters:
   - id: chapter_14
     file: chapters/chapter_14.md
     title: Глава 14
-    description: ""
+    description: |
+      Александр и монсеньор возвращаются в институт. Они находят Сашу мёртвым, а Ева исчезла. Александр звонит ей, и телефон звонит под диваном — Ева сбежала.
     characters:
       - aleksandr
       - sebastian
   - id: chapter_15
     file: chapters/chapter_15.md
     title: Глава 15
-    description: ""
+    description: |
+      Ева просыпается в деревянном доме профессора Разумника Яковлевича. Дэн приносит чай и объясняет, что организация Александра считала её опасной. Они будут разбираться, почему.
     characters:
       - eva
       - raiden
@@ -150,7 +165,8 @@ chapters:
   - id: chapter_16
     file: chapters/chapter_16.md
     title: Глава 16
-    description: ""
+    description: |
+      Ева узнаёт о мистических практиках Нефритовой Империи. Она начинает видеть тёмную фигуру в зеркале. Профессор и Дэн намекают, что с ней происходит что-то необычное.
     characters:
       - eva
       - raiden
@@ -158,14 +174,16 @@ chapters:
   - id: chapter_17
     file: chapters/chapter_17.md
     title: Глава 17
-    description: ""
+    description: |
+      Ева утром общается с Профессором о древних путях и силах, которые могут пробудиться в человеке.
     characters:
       - eva
       - professor
   - id: chapter_18
     file: chapters/chapter_18.md
     title: Глава 18
-    description: ""
+    description: |
+      Профессор оказывается предателем. Дэн раскрывается как маньяк, стоящий за событиями.
     characters:
       - eva
       - professor
@@ -173,7 +191,8 @@ chapters:
   - id: chapter_19
     file: chapters/chapter_19.md
     title: Глава 19
-    description: ""
+    description: |
+      Дэн убивает Профессора и пытается уговорить Еву пойти с ним, принять свою силу.
     characters:
       - eva
       - professor
@@ -181,7 +200,8 @@ chapters:
   - id: chapter_20
     file: chapters/chapter_20.md
     title: Глава 20
-    description: ""
+    description: |
+      Александр и Охотник врываются в дом. После схватки Дэн побеждён.
     characters:
       - eva
       - raiden
@@ -190,7 +210,8 @@ chapters:
   - id: chapter_21
     file: chapters/chapter_21.md
     title: Глава 21
-    description: ""
+    description: |
+      Ева принимает свою силу и убивает Охотника. Александр берёт крест Охотника и заточает Дэна.
     characters:
       - eva
       - raiden
@@ -199,7 +220,8 @@ chapters:
   - id: chapter_22
     file: chapters/chapter_22.md
     title: Глава 22
-    description: ""
+    description: |
+      В разгромленном доме Александр обещает Еве помочь разобраться с её новой силой и контролировать её.
     characters:
       - eva
       - aleksandr
