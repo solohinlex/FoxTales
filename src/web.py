@@ -10,15 +10,42 @@ from config import WEB_PORT
 # Индексация при старте
 vector_store.index_all()
 
-def chat(message, history):
-    """Обработчик чата"""
-    # history у gradio уже в нужном формате [[user, bot], ...]
+# ─── Авто-определение режима ─────────────────────────────────
+MODE_KEYWORDS = {
+    "analysis": ["проанализируй", "анализ", "оцени", "разбери", "критика", "сильные стороны", "слабые стороны"],
+    "editing": ["отредактируй", "исправь", "улучши", "правки", "редактирование", "стилистика"],
+    "lore_check": ["проверь лор", "соответствует канону", "противоречие", "канон", "лор"],
+    "character": ["персонаж", "создай персонажа", "придумай персонажа", "карточка персонажа"],
+    "planning": ["план", "планирован", "структура", "сюжет", "распиши план", "оглавление"],
+    "search": ["найди", "поиск", "что известно", "где упоминается", "информация"],
+}
+
+def detect_mode(message: str) -> str:
+    """Определить режим на основе ключевых слов в запросе"""
+    message_lower = message.lower()
+    
+    for mode, keywords in MODE_KEYWORDS.items():
+        if any(keyword in message_lower for keyword in keywords):
+            return mode
+    
+    return "search"  # режим по умолчанию
+
+
+# ── Обработчики ─────────────────────────────────────────────
+def chat(message, history, mode_selector):
+    """Обработчик чата с авто-определением или ручным выбором режима"""
+    # Определяем режим: если выбран "auto" — определяем автоматически
+    if mode_selector == "auto":
+        detected_mode = detect_mode(message)
+    else:
+        detected_mode = mode_selector
+    
     agent_history = []
     for user_msg, bot_msg in history:
         agent_history.append({"role": "user", "content": user_msg})
         agent_history.append({"role": "assistant", "content": bot_msg})
     
-    answer = run_agent(message, agent_history, SYSTEM_PROMPT)
+    answer = run_agent(message, agent_history, SYSTEM_PROMPT, task=detected_mode)
     return answer
 
 def reindex():
@@ -50,7 +77,7 @@ def get_index_status():
     
     return result
 
-# Создаём интерфейс с вкладками
+# ── Интерфейс ───────────────────────────────────────────────
 with gr.Blocks(title="🦊 FoxTales AI") as demo:
     gr.Markdown("# 🦊 FoxTales AI")
     gr.Markdown("Ассистент по миру FoxTales")
@@ -58,10 +85,80 @@ with gr.Blocks(title="🦊 FoxTales AI") as demo:
     with gr.Tabs():
         # Вкладка чата
         with gr.TabItem("💬 Чат"):
-            chat_interface = gr.ChatInterface(
-                fn=chat,
-                title="Диалог с ИИ",
-                description="Задавайте вопросы о мире FoxTales",
+            gr.Markdown("### Режим работы в чате")
+            mode_selector = gr.Radio(
+                choices=[
+                    ("🤖 Авто-определение", "auto"),
+                    ("🔍 Поиск информации", "search"),
+                    ("📝 Анализ текста", "analysis"),
+                    ("✏️ Редактирование", "editing"),
+                    ("🌍 Проверка лора", "lore_check"),
+                    ("👤 Персонаж", "character"),
+                    ("📋 Планирование", "planning"),
+                ],
+                value="auto",
+                label="Выберите режим"
+            )
+            
+            chatbot = gr.Chatbot(label="Диалог с ИИ", height=400)
+            msg_input = gr.Textbox(
+                label="Введите сообщение",
+                placeholder="Задайте вопрос о мире FoxTales...",
+                lines=3
+            )
+            send_btn = gr.Button("Отправить", variant="primary")
+            
+            def add_user_message(message, history):
+                """Добавляет сообщение пользователя в историю"""
+                history = history or []
+                history.append({"role": "user", "content": message})
+                return "", history
+            
+            def bot_response(history, mode):
+                """Генерирует ответ бота"""
+                if not history or history[-1].get("role") != "user":
+                    return history
+                
+                # message может быть строкой или списком (в зависимости от версии Gradio)
+                message_content = history[-1]["content"]
+                if isinstance(message_content, list):
+                    message = message_content[0].get("text", "") if message_content else ""
+                else:
+                    message = message_content
+                
+                # Создаём историю для агента
+                agent_history = []
+                for msg in history[:-1]:
+                    content = msg.get("content", "")
+                    if isinstance(content, list):
+                        content = content[0].get("text", "") if content else ""
+                    
+                    if msg.get("role") == "user":
+                        agent_history.append({"role": "user", "content": content})
+                    elif msg.get("role") == "assistant":
+                        agent_history.append({"role": "assistant", "content": content})
+                
+                # Определяем режим
+                if mode == "auto":
+                    detected_mode = detect_mode(message)
+                else:
+                    detected_mode = mode
+                
+                # Запускаем агента
+                answer = run_agent(message, agent_history, SYSTEM_PROMPT, task=detected_mode)
+                
+                # Добавляем ответ в историю
+                history.append({"role": "assistant", "content": answer})
+                return history
+            
+            send_btn.click(
+                fn=add_user_message,
+                inputs=[msg_input, chatbot],
+                outputs=[msg_input, chatbot]
+            ).then(
+                fn=bot_response,
+                inputs=[chatbot, mode_selector],
+                outputs=[chatbot]
             )
         
         # Вкладка управления индексом
@@ -78,43 +175,6 @@ with gr.Blocks(title="🦊 FoxTales AI") as demo:
             reindex_output = gr.Textbox(label="Результат", interactive=False)
             reindex_btn.click(fn=reindex, outputs=reindex_output)
         
-        # Вкладка режимов работы
-        with gr.TabItem("🎯 Режимы работы"):
-            gr.Markdown("### Выбор режима работы ИИ")
-            
-            mode_selector = gr.Dropdown(
-                label="Режим",
-                choices=[
-                    ("🔍 Поиск информации", "search"),
-                    ("📝 Анализ текста", "analysis"),
-                    ("✏️ Редактирование", "editing"),
-                    ("🌍 Проверка лора", "lore_check"),
-                    ("👤 Персонаж", "character"),
-                    ("📋 Планирование", "planning"),
-                ],
-                value="search"
-            )
-            
-            mode_input = gr.Textbox(
-                label="Запрос / Текст",
-                placeholder="Введите запрос или текст для анализа...",
-                lines=5
-            )
-            
-            mode_output = gr.Textbox(label="Результат", lines=10, interactive=False)
-            
-            mode_btn = gr.Button("Выполнить", variant="primary")
-            
-            def run_mode(mode: str, text: str):
-                """Запуск агента в выбранном режиме"""
-                answer = run_agent(text, [], task=mode)
-                return answer
-            
-            mode_btn.click(
-                fn=run_mode,
-                inputs=[mode_selector, mode_input],
-                outputs=mode_output
-            )
 
 def open_browser(url: str):
     """Открыть браузер после небольшой задержки"""
