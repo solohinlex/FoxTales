@@ -36,6 +36,7 @@
 - WSL2 / Linux
 - Python 3.12+
 - [Ollama](https://ollama.com/) — установлен и запущен локально, либо доступен OpenAI API
+- Embedding AI (OpanAI или Ollama совместимая), например nomic-embed-text, его можно запустить в локальной Ollama, она занимает ок. 300Мб
 - `make` — для удобного управления проектом
 
 ---

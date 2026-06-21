@@ -12,6 +12,7 @@ def main():
     print("📚 Проверяю индекс...")
     vector_store.index_all()
     print()
+    print_help()
 
     history = []
 
