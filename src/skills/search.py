@@ -1,53 +1,57 @@
 # src/skills/search.py
-import os
 from .base import Skill, SkillResult
+from vector_store import vector_store
 
-CONTENT_PATH = "./content"
 
 class SearchContent(Skill):
     name = "search_content"
-    description = "Поиск по всему контенту проекта"
+    description = (
+        "Семантический поиск по всему контенту проекта: "
+        "персонажи, лор, главы произведений. "
+        "Понимает смысл, а не только точные совпадения слов."
+    )
     parameters = {
         "type": "object",
         "properties": {
             "query": {
                 "type": "string",
-                "description": "Поисковый запрос"
+                "description": "Поисковый запрос на естественном языке"
+            },
+            "type": {
+                "type": "string",
+                "enum": ["character", "lore", "chapter"],
+                "description": "Ограничить поиск типом контента (опционально)"
             },
             "work": {
                 "type": "string",
-                "description": "Ограничить поиск произведением (опционально)"
+                "description": "Ограничить поиск произведением: fox_tales или witch_hounting (опционально)"
             }
         },
         "required": ["query"]
     }
 
-    def execute(self, query: str, work: str = None, **kwargs) -> SkillResult:
-        results = []
-        base = os.path.join(CONTENT_PATH, "works", work) if work else CONTENT_PATH
+    def execute(self, query: str, type: str = None, work: str = None, **kwargs) -> SkillResult:
+        # Фильтры для ChromaDB
+        where = None
+        if type and work:
+            where = {"$and": [{"type": {"$eq": type}}, {"work": {"$eq": work}}]}
+        elif type:
+            where = {"type": {"$eq": type}}
+        elif work:
+            where = {"work": {"$eq": work}}
 
-        for root, dirs, files in os.walk(base):
-            # Пропускаем папки с изображениями
-            dirs[:] = [d for d in dirs if d != 'images']
-            for filename in files:
-                if not filename.endswith(('.md', '.txt', '.yml')):
-                    continue
-                filepath = os.path.join(root, filename)
-                with open(filepath, 'r', encoding='utf-8') as f:
-                    lines = f.readlines()
-                for i, line in enumerate(lines):
-                    if query.lower() in line.lower():
-                        context_start = max(0, i - 1)
-                        context_end = min(len(lines), i + 2)
-                        context = "".join(lines[context_start:context_end]).strip()
-                        rel_path = os.path.relpath(filepath, CONTENT_PATH)
-                        results.append(f"📄 {rel_path}:{i+1}\n{context}")
+        results = vector_store.search(query, n_results=5, where=where)
 
         if not results:
-            return SkillResult(False, f"Ничего не найдено: '{query}'")
+            return SkillResult(False, f"Ничего не найдено по запросу: '{query}'")
 
-        output = f"🔍 '{query}' — {len(results)} совпадений:\n\n"
-        output += "\n\n---\n\n".join(results[:10])
-        if len(results) > 10:
-            output += f"\n\n...и ещё {len(results) - 10}"
-        return SkillResult(True, output)
+        lines = [f"🔍 Результаты поиска: '{query}'\n"]
+        for r in results:
+            meta = r["metadata"]
+            score = r["score"]
+            source = meta.get("source", "?")
+            lines.append(f"📄 {source} (релевантность: {score:.2f})")
+            lines.append(r["text"][:500])  # первые 500 символов
+            lines.append("---")
+
+        return SkillResult(True, "\n".join(lines))
