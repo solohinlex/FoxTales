@@ -1,8 +1,11 @@
 # src/web.py
 import gradio as gr
+import webbrowser
+import threading
 from agent import run_agent
 from prompts import SYSTEM_PROMPT, Presets, PromptBuilder
 from vector_store import vector_store
+from config import WEB_PORT
 
 # Индексация при старте
 vector_store.index_all()
@@ -113,5 +116,23 @@ with gr.Blocks(title="🦊 FoxTales AI") as demo:
                 outputs=mode_output
             )
 
+def open_browser(url: str):
+    """Открыть браузер после небольшой задержки"""
+    def _open():
+        import time
+        time.sleep(1.5)  # Ждём запуска сервера
+        webbrowser.open(url)
+    threading.Thread(target=_open).start()
+
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=7860)
+    url = f"http://localhost:{WEB_PORT}"
+    print(f"\n🌐 Открываю браузер... Если не открылся, перейдите по ссылке: {url}\n")
+    
+    # Открываем браузер вручную
+    open_browser(url)
+    
+    demo.launch(
+        server_name="0.0.0.0",
+        server_port=WEB_PORT,
+        inbrowser=False  # Используем свой метод
+    )

@@ -35,6 +35,9 @@ CONTENT_PATH = ROOT / "content"
 DATA_PATH    = ROOT / "data"
 CHROMA_PATH  = DATA_PATH / "chroma_db"
 
+# ─── Веб-интерфейс ──────────────────────────────────────────
+WEB_PORT = int(os.getenv("WEB_PORT", "7860"))
+
 # ─── Структура папок ───────────────────────────────────────
 _DIRS = [
     CONTENT_PATH / "works",
