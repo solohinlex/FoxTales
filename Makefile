@@ -5,6 +5,7 @@ VENV        ?= .venv
 PYTHON      ?= $(VENV)/bin/python
 PIP         ?= $(VENV)/bin/pip
 SRC         ?= src/main.py
+WEB         ?= src/web.py
 
 export PYTHONIOENCODING = utf-8
 export PYTHONUTF8       = 1
@@ -37,6 +38,10 @@ setup: install ## Первичная настройка: venv + deps + .env (mak
 .PHONY: run
 run: ## Запускает бота (make run)
 	$(PYTHON) $(SRC)
+
+.PHONY: web
+web: ## Запускает веб-интерфейс (make web)
+	$(PYTHON) $(WEB)
 
 # ─── Git ──────────────────────────────────────────────────
 .PHONY: push
