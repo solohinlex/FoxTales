@@ -1,4 +1,5 @@
 # src/main.py
+import sys
 from config import MODEL
 from agent import run_agent
 from prompts import SYSTEM_PROMPT
@@ -17,7 +18,10 @@ def main():
     history = []
 
     while True:
-        user_input = input("Ты: ").strip()
+        sys.stdout.write("Ты: ")
+        sys.stdout.flush()
+        raw = sys.stdin.buffer.readline()
+        user_input = raw.decode('utf-8', errors='replace').strip()
 
         if not user_input:
             continue
