@@ -1,0 +1,43 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: foxtales-ollama
+    volumes:
+      - ollama_models:/root/.ollama
+    # Порт не пробрасывается — Ollama доступна только внутри Docker-сети
+    restart: unless-stopped
+    networks:
+      - foxtales-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: foxtales-app
+    volumes:
+      - ${CONTENT_PATH:-./content}:/app/content:ro
+      - chroma_data:/app/data
+      - ./.env:/app/.env:ro
+    environment:
+      - EMBED_BASE_URL=http://ollama:11434
+      - EMBED_MODEL=nomic-embed-text
+      - WEB_PORT=${WEB_PORT:-7860}
+    depends_on:
+      - ollama
+    ports:
+      - "${WEB_PORT:-7860}:7860"
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - foxtales-network
+
+volumes:
+  ollama_models:
+    name: foxtales-ollama-models
+  chroma_data:
+    name: foxtales-chroma-data
+
+networks:
+  foxtales-network:
+    driver: bridge

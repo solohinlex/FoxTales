@@ -80,3 +80,39 @@ run-debug: ## Отладка окружения
 	@echo "LANG=$$LANG"
 	@echo "LC_ALL=$$LC_ALL"
 	@echo "PYTHONIOENCODING=$$PYTHONIOENCODING"
+
+# ─── Docker ─────────────────────────────────────────────────
+.PHONY: docker-build
+docker-build: ## Собрать Docker-образы
+	docker compose build
+
+.PHONY: docker-up
+docker-up: ## Запустить Docker-контейнеры (фоновый режим)
+	docker compose up -d
+	@echo "✅ Контейнеры запущены. Веб-интерфейс: http://localhost:$${WEB_PORT:-7860}"
+
+.PHONY: docker-run
+docker-run: ## Запустить Docker-контейнеры (foreground)
+	docker compose up
+
+.PHONY: docker-down
+docker-down: ## Остановить Docker-контейнеры
+	docker compose down
+	@echo "✅ Контейнеры остановлены"
+
+.PHONY: docker-logs
+docker-logs: ## Показать логи контейнеров
+	docker compose logs -f
+
+.PHONY: docker-shell
+docker-shell: ## Открыть shell в контейнере приложения
+	docker compose exec app /bin/bash
+
+.PHONY: docker-reindex
+docker-reindex: ## Переиндексация в Docker
+	docker compose exec app python src/main.py reindex
+
+.PHONY: docker-clean
+docker-clean: ## Удалить volumes и образы
+	docker compose down -v
+	@echo "✅ Docker volumes и образы удалены"
