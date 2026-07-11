@@ -199,7 +199,7 @@ chapters:
     file: chapters/chapter_17.md
     title: Глава 17
     description: |
-      Ева утром общается с Профессором о древних путях и силах, которые могут пробудиться в человеке.
+      Во время практического исследования Ева решает, что Черный виновен в гибели её родителей. Она боится магии, но Дэн её утешает.
     characters:
       - eva
       - professor
@@ -207,16 +207,15 @@ chapters:
     file: chapters/chapter_18.md
     title: Глава 18
     description: |
-      Профессор оказывается предателем. Дэн раскрывается как маньяк, стоящий за событиями.
+      Ева утром общается с Профессором о древних путях и силах, которые могут пробудиться в человеке.
     characters:
       - eva
       - professor
-      - raiden
   - id: chapter_19
     file: chapters/chapter_19.md
     title: Глава 19
     description: |
-      Дэн убивает Профессора и пытается уговорить Еву пойти с ним, принять свою силу.
+      Профессор оказывается предателем. Дэн раскрывается как маньяк, стоящий за событиями.
     characters:
       - eva
       - professor
@@ -225,17 +224,16 @@ chapters:
     file: chapters/chapter_20.md
     title: Глава 20
     description: |
-      Александр и Охотник врываются в дом. После схватки Дэн побеждён.
+      Дэн убивает Профессора и пытается уговорить Еву пойти с ним, принять свою силу.
     characters:
       - eva
+      - professor
       - raiden
-      - aleksandr
-      - sebastian
   - id: chapter_21
     file: chapters/chapter_21.md
     title: Глава 21
     description: |
-      Ева принимает свою силу и убивает Охотника. Александр берёт крест Охотника и заточает Дэна.
+      Александр и Охотник врываются в дом. После схватки Дэн побеждён.
     characters:
       - eva
       - raiden
@@ -244,6 +242,16 @@ chapters:
   - id: chapter_22
     file: chapters/chapter_22.md
     title: Глава 22
+    description: |
+      Ева принимает свою силу и убивает Охотника. Александр берёт крест Охотника и заточает Дэна.
+    characters:
+      - eva
+      - raiden
+      - aleksandr
+      - sebastian
+  - id: chapter_23
+    file: chapters/chapter_23.md
+    title: Глава 23
     description: |
       В разгромленном доме Александр обещает Еве помочь разобраться с её новой силой и контролировать её.
     characters:
