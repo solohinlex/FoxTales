@@ -78,35 +78,67 @@ def get_index_status():
     return result
 
 # ── Интерфейс ───────────────────────────────────────────────
-with gr.Blocks(title="🦊 FoxTales AI") as demo:
+CUSTOM_CSS = """
+.chat-container {
+    height: calc(100vh - 200px) !important;
+}
+.chatbot-container {
+    height: calc(100vh - 200px) !important;
+}
+.right-panel {
+    height: 100% !important;
+}
+.right-panel .gr-box {
+    height: auto !important;
+}
+.right-panel .gr-button {
+    height: auto !important;
+    min-height: 40px;
+}
+.right-panel textarea {
+    min-height: 200px !important;
+    flex-grow: 1 !important;
+}
+"""
+
+with gr.Blocks(title="🦊 FoxTales AI", css=CUSTOM_CSS) as demo:
     gr.Markdown("# 🦊 FoxTales AI")
     gr.Markdown("Ассистент по миру FoxTales")
     
     with gr.Tabs():
         # Вкладка чата
         with gr.TabItem("💬 Чат"):
-            gr.Markdown("### Режим работы в чате")
-            mode_selector = gr.Radio(
-                choices=[
-                    ("🤖 Авто-определение", "auto"),
-                    ("🔍 Поиск информации", "search"),
-                    ("📝 Анализ текста", "analysis"),
-                    ("✏️ Редактирование", "editing"),
-                    ("🌍 Проверка лора", "lore_check"),
-                    ("👤 Персонаж", "character"),
-                    ("📋 Планирование", "planning"),
-                ],
-                value="auto",
-                label="Выберите режим"
-            )
-            
-            chatbot = gr.Chatbot(label="Диалог с ИИ", height=400)
-            msg_input = gr.Textbox(
-                label="Введите сообщение",
-                placeholder="Задайте вопрос о мире FoxTales...",
-                lines=3
-            )
-            send_btn = gr.Button("Отправить", variant="primary")
+            with gr.Row(equal_height=True):
+                # Левая колонка - чатбот
+                with gr.Column(scale=3):
+                    chatbot = gr.Chatbot(
+                        label="Диалог с ИИ",
+                        height=600,
+                        container=False,
+                        elem_classes=["chatbot-container"]
+                    )
+                
+                # Правая колонка - управление
+                with gr.Column(scale=1, elem_classes=["right-panel"]):
+                    mode_selector = gr.Dropdown(
+                        choices=[
+                            ("🤖 Авто-определение", "auto"),
+                            ("🔍 Поиск информации", "search"),
+                            ("📝 Анализ текста", "analysis"),
+                            ("✏️ Редактирование", "editing"),
+                            ("🌍 Проверка лора", "lore_check"),
+                            ("👤 Персонаж", "character"),
+                            ("📋 Планирование", "planning"),
+                        ],
+                        value="auto",
+                        label="Режим"
+                    )
+                    msg_input = gr.Textbox(
+                        label="Сообщение",
+                        placeholder="Задайте вопрос о мире FoxTales...",
+                        lines=5
+                    )
+                    send_btn = gr.Button("Отправить", variant="primary")
             
             def add_user_message(message, history):
                 """Добавляет сообщение пользователя в историю"""
