@@ -9,7 +9,8 @@ def run_agent(
     user_message: str,
     history: list,
     system_prompt: str | None = None,
-    task: str | None = None
+    task: str | None = None,
+    variant: str = "default"
 ) -> str:
     """Запуск агента с поддержкой выбора промпта
     
@@ -18,17 +19,18 @@ def run_agent(
         history: История диалога
         system_prompt: Системный промпт (для обратной совместимости)
         task: Название задачи для выбора пресета (analysis, editing, etc.)
+        variant: Вариант промпта ("default" или "extract")
     
     Returns:
         Ответ агента
     """
     # Определяем промпт: либо из task, либо из system_prompt
     if task:
-        prompt = Presets.for_task(task)
+        prompt = Presets.for_task(task, variant)
     elif system_prompt:
         prompt = system_prompt
     else:
-        prompt = Presets.for_task("search")  # промпт по умолчанию
+        prompt = Presets.for_task("search", variant)  # промпт по умолчанию
     
     history.append({"role": "user", "content": user_message})
     

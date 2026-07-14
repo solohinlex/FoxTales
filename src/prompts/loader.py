@@ -26,6 +26,19 @@ def load_prompt(name: str) -> str:
     return path.read_text(encoding="utf-8")
 
 
+# Маппинг вариантов промптов
+VARIANT_MAP = {
+    "analysis": {
+        "default": "analysis",
+        "extract": "extract_analysis",
+    },
+    "character": {
+        "default": "character",
+        "extract": "extract_character",
+    },
+}
+
+
 class PromptBuilder:
     """Конструктор промптов для гибкой композиции"""
     
@@ -70,51 +83,29 @@ class Presets:
     """Наборы промптов для типовых задач"""
     
     @staticmethod
-    def for_task(task_name: str) -> str:
-        """Получить промпт для задачи
+    def for_task(task_name: str, variant: str = "default") -> str:
+        """Получить промпт для задачи с поддержкой вариантов
         
         Args:
             task_name: Название задачи
+            variant: Вариант промпта ("default" или "extract")
         
         Returns:
             Промпт для задачи
         """
-        presets = {
-            "analysis": lambda: PromptBuilder()
-                .add("system")
-                .add("analysis")
-                .build(),
-            
-            "editing": lambda: PromptBuilder()
-                .add("system")
-                .add("editing")
-                .build(),
-            
-            "lore_check": lambda: PromptBuilder()
-                .add("system")
-                .add("lore_check")
-                .build(),
-            
-            "character": lambda: PromptBuilder()
-                .add("system")
-                .add("character")
-                .build(),
-            
-            "planning": lambda: PromptBuilder()
-                .add("system")
-                .add("planning")
-                .build(),
-            
-            "search": lambda: PromptBuilder()
-                .add("system")
-                .add("search")
-                .build(),
-        }
+        # Определяем базовый промпт в зависимости от варианта
+        system_prompt = "extract" if variant == "extract" else "system"
         
-        if task_name not in presets:
-            return load_prompt("system")
+        # Определяем специфичный промпт задачи
+        if task_name in VARIANT_MAP:
+            task_prompt = VARIANT_MAP[task_name].get(variant, task_name)
+        else:
+            task_prompt = task_name
         
-        return presets[task_name]()
+        builder = PromptBuilder()
+        builder.add(system_prompt)
+        builder.add(task_prompt)
+        return builder.build()
     
     @staticmethod
     def list_available() -> list[str]:

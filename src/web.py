@@ -31,8 +31,22 @@ def detect_mode(message: str) -> str:
     return "search"  # режим по умолчанию
 
 
+# ─── Определение варианта промпта ───────────────────────────
+EXTRACT_KEYWORDS = ["извлеки", "извлечение", "подготовь данные", "структурируй данные", "для внешнего ии"]
+
+def detect_variant(message: str) -> str:
+    """Определить вариант промпта на основе ключевых слов"""
+    message_lower = message.lower()
+    
+    for keyword in EXTRACT_KEYWORDS:
+        if keyword in message_lower:
+            return "extract"
+    
+    return "default"  # вариант по умолчанию
+
+
 # ── Обработчики ─────────────────────────────────────────────
-def chat(message, history, mode_selector):
+def chat(message, history, mode_selector, variant_selector):
     """Обработчик чата с авто-определением или ручным выбором режима"""
     # Определяем режим: если выбран "auto" — определяем автоматически
     if mode_selector == "auto":
@@ -40,12 +54,18 @@ def chat(message, history, mode_selector):
     else:
         detected_mode = mode_selector
     
+    # Определяем вариант
+    if variant_selector == "auto":
+        detected_variant = detect_variant(message)
+    else:
+        detected_variant = variant_selector
+    
     agent_history = []
     for user_msg, bot_msg in history:
         agent_history.append({"role": "user", "content": user_msg})
         agent_history.append({"role": "assistant", "content": bot_msg})
     
-    answer = run_agent(message, agent_history, SYSTEM_PROMPT, task=detected_mode)
+    answer = run_agent(message, agent_history, SYSTEM_PROMPT, task=detected_mode, variant=detected_variant)
     return answer
 
 def reindex():
@@ -133,6 +153,14 @@ with gr.Blocks(title="🦊 FoxTales AI", css=CUSTOM_CSS) as demo:
                         value="auto",
                         label="Режим"
                     )
+                    variant_selector = gr.Dropdown(
+                        choices=[
+                            ("⚙️ По умолчанию", "default"),
+                            ("📤 Extract для внешних ИИ", "extract"),
+                        ],
+                        value="default",
+                        label="Вариант промпта"
+                    )
                     msg_input = gr.Textbox(
                         label="Сообщение",
                         placeholder="Задайте вопрос о мире FoxTales...",
@@ -146,7 +174,7 @@ with gr.Blocks(title="🦊 FoxTales AI", css=CUSTOM_CSS) as demo:
                 history.append({"role": "user", "content": message})
                 return "", history
             
-            def bot_response(history, mode):
+            def bot_response(history, mode, variant):
                 """Генерирует ответ бота"""
                 if not history or history[-1].get("role") != "user":
                     return history
@@ -177,7 +205,7 @@ with gr.Blocks(title="🦊 FoxTales AI", css=CUSTOM_CSS) as demo:
                     detected_mode = mode
                 
                 # Запускаем агента
-                answer = run_agent(message, agent_history, SYSTEM_PROMPT, task=detected_mode)
+                answer = run_agent(message, agent_history, SYSTEM_PROMPT, task=detected_mode, variant=variant)
                 
                 # Добавляем ответ в историю
                 history.append({"role": "assistant", "content": answer})
@@ -189,7 +217,7 @@ with gr.Blocks(title="🦊 FoxTales AI", css=CUSTOM_CSS) as demo:
                 outputs=[msg_input, chatbot]
             ).then(
                 fn=bot_response,
-                inputs=[chatbot, mode_selector],
+                inputs=[chatbot, mode_selector, variant_selector],
                 outputs=[chatbot]
             )
         
